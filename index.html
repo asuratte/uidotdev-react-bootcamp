@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,34 +10,42 @@
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
+
 <body>
     <div id="app"></div>
 
     <script type="text/babel">
-        const name = 'Amber';
-        const handle = '@amber.suratte';
-
-        function NameComponent(props) {
-            return <h1>{props.name}</h1>;
-        }
-
-        function HandleComponent(props) {
-            return <h3>{props.handle}</h3>;
-        }
-
-        function App() {
-            return(
-                <div id="container">
-                    <NameComponent name={name} />
-                    <HandleComponent handle={handle} />
-                </div>
+        function FriendsList(props) {
+            return (
+                <ul>
+                    {props.list.map((name) => (
+                        <li key={name}>{name}</li>
+                    ))}
+                </ul>
             );
         }
 
-        ReactDOM.render( 
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    friends: ['Jordyn', 'Mikenzi', 'Jake']
+                }
+            }
+            render() {
+                return (
+                    <div>
+                        <FriendsList list={this.state.friends} />
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
             <App />,
             document.getElementById('app')
         );
     </script>
 </body>
+
 </html>
